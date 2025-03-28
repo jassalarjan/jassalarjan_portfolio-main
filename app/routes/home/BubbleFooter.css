@@ -1,0 +1,109 @@
+body .foot {
+  margin-top: 10rem;
+  z-index: 1;
+  --foot-background: #000e59;
+
+  display: grid;
+  position: relative;
+  grid-area: foot;
+  min-height: 12rem;
+}
+body .foot .bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1rem;
+  background: var(--foot-background);
+  filter: url('#blob');
+}
+body .foot .bubbles .bubble {
+  position: absolute;
+  left: var(--position, 50%);
+  background: var(--foot-background);
+  border-radius: 100%;
+  -webkit-animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s),
+    bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
+  animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s),
+    bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
+  transform: translate(-50%, 100%);
+}
+body .foot .content {
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: 4rem;
+  padding: 2rem;
+  background: var(--foot-background);
+}
+body .foot .content a,
+body .foot .content p {
+  color: #f5f7fa;
+  text-decoration: none;
+}
+body .foot .content b {
+  color: white;
+}
+body .foot .content p {
+  margin: 0;
+  font-size: 0.75rem;
+}
+body .foot .content > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+body .foot .content > div > div {
+  margin: 0.25rem 0;
+}
+body .foot .content > div > div > * {
+  margin-right: 0.5rem;
+}
+body .foot .content > div .image {
+  align-self: center;
+  width: 4rem;
+  height: 4rem;
+  margin: 0.25rem 0;
+  background-size: cover;
+  background-position: center;
+}
+
+@-webkit-keyframes bubble-size {
+  0%,
+  75% {
+    width: var(--size, 4rem);
+    height: var(--size, 4rem);
+  }
+  100% {
+    width: 0rem;
+    height: 0rem;
+  }
+}
+
+@keyframes bubble-size {
+  0%,
+  75% {
+    width: var(--size, 4rem);
+    height: var(--size, 4rem);
+  }
+  100% {
+    width: 0rem;
+    height: 0rem;
+  }
+}
+@-webkit-keyframes bubble-move {
+  0% {
+    bottom: -4rem;
+  }
+  100% {
+    bottom: var(--distance, 10rem);
+  }
+}
+@keyframes bubble-move {
+  0% {
+    bottom: -4rem;
+  }
+  100% {
+    bottom: var(--distance, 10rem);
+  }
+}
