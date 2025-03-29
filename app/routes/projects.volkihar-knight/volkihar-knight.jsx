@@ -63,12 +63,12 @@ export function VolkiharKnight() {
         dangerouslySetInnerHTML={{
           __html: `
             [data-theme='dark'] {
-              --primary: oklch(87.71% 0.084 85.29);
-              --accent: oklch(87.71% 0.084 85.29);
+              --primary: #4361EE;
+              --accent: #4361EE;
             }
             [data-theme='light'] {
-              --primary: oklch(52.25% 0.121 81.53);
-              --accent: oklch(52.25% 0.121 81.53);
+              --primary: #4361EE;
+              --accent: #4361EE;
             }
           `,
         }}

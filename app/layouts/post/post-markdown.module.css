@@ -71,7 +71,7 @@
 
   .code {
     color: var(--textLight);
-    background: color-mix(in lab, var(--text) 8%, transparent);
+    background: color-mix(in lab, var(--textBody) 8%, transparent);
     padding: 0.2em 0.6em 0.2em 0.4em;
     font-size: 0.9em;
 

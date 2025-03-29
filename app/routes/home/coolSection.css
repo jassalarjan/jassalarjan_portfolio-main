@@ -18,15 +18,16 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  color: white;
+  color: var(--textTitle);
   padding: 1rem;
 }
 
 .title {
   font-size: 2.5rem;
-  font-weight: bold;
+  font-weight: var(--fontWeightBold);
   margin-bottom: 1rem;
   text-align: center;
+  color: var(--textTitle);
 }
 
 .description {
@@ -34,6 +35,7 @@
   margin-bottom: 2rem;
   max-width: 40rem;
   text-align: center;
+  color: var(--textBody);
 }
 
 .skills-section {
@@ -42,9 +44,10 @@
 
 .subtitle {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: var(--fontWeightMedium);
   margin-bottom: 1rem;
   text-align: center;
+  color: var(--textTitle);
 }
 
 .skills-list {
@@ -55,11 +58,12 @@
 }
 
 .badge {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
+  background-color: var(--backgroundLight);
+  color: var(--textBody);
   padding: 0.25rem 0.5rem;
   border-radius: 9999px;
   font-size: 0.875rem;
+  transition: all var(--durationS) ease;
 }
 
 @keyframes float {
@@ -79,17 +83,19 @@
 }
 
 .glow {
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  text-shadow: 0 0 10px color-mix(in lab, var(--textTitle) 70%, transparent);
 }
 
 .badge-glow {
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
+  box-shadow: 0 0 10px color-mix(in lab, var(--textTitle) 30%, transparent);
+  transition: all var(--durationS) ease;
 }
 
 .badge-glow:hover {
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 20px color-mix(in lab, var(--textTitle) 50%, transparent);
   transform: translateY(-2px);
+  background-color: var(--primary);
+  color: var(--background);
 }
 
 @media (min-width: 768px) {

@@ -76,8 +76,8 @@
   }
 
   .credit {
-    color: color-mix(in lab, var(--white) 40%, transparent);
-    background: color-mix(in lab, var(--black) 60%, transparent);
+    color: color-mix(in lab, var(--textTitle) 40%, transparent);
+    background: color-mix(in lab, var(--background) 60%, transparent);
     padding: var(--spaceXS) var(--spaceS);
     font-size: var(--fontSizeBodyS);
     position: absolute;
@@ -91,7 +91,7 @@
 
     &:hover,
     &:focus {
-      color: var(--white);
+      color: var(--textTitle);
     }
 
     &[data-visible='true'] {

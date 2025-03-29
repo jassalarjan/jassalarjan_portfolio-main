@@ -7,19 +7,16 @@ import throttle from "lodash/throttle";
 import { Typography } from "@mui/material";
 import CustomModal from "../modal/CustomModal";
 import * as THREE from "three";
-
-// Projects Data
-const projects = [
-  { id: 1, title: "Project 1", img: "/images/1.jpg", description: "Description for Project 1" },
-  { id: 2, title: "Project 2", img: "/images/2.jpg", description: "Description for Project 2" },
-  { id: 3, title: "Project 3", img: "/images/3.jpg", description: "Description for Project 3" },
-  { id: 4, title: "Project 4", img: "/images/4.jpg", description: "Description for Project 4" },
-];
+import { projects } from "~/data/projects";
+import { DecoderText } from "~/components/decoder-text";
 
 // 3D Project Image Component
 function ProjectImage({ position, project, onClick, onHover }) {
   const [hovered, setHovered] = useState(false);
-  const { scale } = useSpring({ scale: hovered ? 1.8 : 1.4 });
+  const { scale } = useSpring({
+    scale: hovered ? 1.3 : 1,
+    config: { mass: 1, tension: 280, friction: 60 }
+  });
 
   return (
     <animated.mesh
@@ -31,11 +28,11 @@ function ProjectImage({ position, project, onClick, onHover }) {
       }}
       onPointerOut={() => {
         setHovered(false);
-        onHover(null); // Reset hover when leaving
+        onHover(null);
       }}
       onClick={() => onClick(project)}
     >
-      <planeGeometry args={[1.5, 1.5]} />
+      <planeGeometry args={[3, 1.5]} />
       <meshBasicMaterial
         map={new THREE.TextureLoader().load(project.img)}
         side={THREE.DoubleSide}
@@ -47,22 +44,21 @@ function ProjectImage({ position, project, onClick, onHover }) {
 
 // 3D Scene Component
 function Scene({ onClick, onHover }) {
-  const radius = 5;
+  const radius = 10;
   const groupRef = useRef();
-  const [mouseY, setMouseY] = useState(0);
+  const mouseYRef = useRef(0);
 
   // Smooth Auto-Rotation
   useFrame(() => {
     if (groupRef.current) {
-      groupRef.current.rotation.y += 0.002; // Slow auto-rotation
-      groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, mouseY * 0.5, 0.05);
+      groupRef.current.rotation.y += 0.001; // Slow auto-rotation
+      groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, mouseYRef.current * 0.3, 0.05);
     }
   });
 
   useEffect(() => {
     const handleMouseMove = throttle((e) => {
-      const y = (e.clientY / window.innerHeight - 0.5) * 2;
-      setMouseY(y);
+      mouseYRef.current = (e.clientY / window.innerHeight - 0.5) * 2;
     }, 100);
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -73,7 +69,11 @@ function Scene({ onClick, onHover }) {
     <group ref={groupRef}>
       {projects.map((project, index) => {
         const angle = (index / projects.length) * Math.PI * 2;
-        const position = [radius * Math.cos(angle), 0, radius * Math.sin(angle)];
+        const position = [
+          radius * Math.cos(angle),
+          0,
+          radius * Math.sin(angle)
+        ];
         return (
           <ProjectImage
             key={project.id}
@@ -92,14 +92,34 @@ function Scene({ onClick, onHover }) {
 export default function ProjectShowcase() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [hoveredProject, setHoveredProject] = useState(null);
+  const [isClient, setIsClient] = useState(false);
 
-  // GSAP Animation for Title
   useEffect(() => {
-    gsap.from(".title-text", { opacity: 0, y: 30, duration: 1.2, stagger: 0.2, ease: "power3.out" });
+    setIsClient(true);
+    gsap.from(".title-text", { 
+      opacity: 0, 
+      y: 30, 
+      duration: 1.2, 
+      stagger: 0.2, 
+      ease: "power3.out" 
+    });
   }, []);
 
+  // Handle hover directly
+  const handleHover = (project) => {
+    setHoveredProject(project);
+  };
+
+  if (!isClient) {
+    return (
+      <div style={{ width: "100%", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Typography variant="h4">Loading...</Typography>
+      </div>
+    );
+  }
+
   return (
-    <div style={{ width: "100%", height: "100vh", position: "relative", overflow: "hidden" }}>
+    <div style={{ width: "100%", height: "100vh", position: "relative", overflow: "hidden", background: "#ffffff" }}>
       {/* Animated Title */}
       <div
         className="title-text"
@@ -108,13 +128,15 @@ export default function ProjectShowcase() {
           top: "5%",
           left: "50%",
           transform: "translateX(-50%)",
-          color: "#fff",
+          color: "#333",
           textAlign: "center",
           zIndex: 5,
         }}
       >
-        <Typography variant="h3" style={{ fontWeight: "bold" }}>Our Projects</Typography>
-        <Typography variant="body1">Explore our work in an interactive 3D showcase.</Typography>
+        <Typography variant="h1" style={{ fontWeight: "bold", fontSize: "2.5rem", letterSpacing: "0.1em", color: "#333", marginBottom: "-5rem" }}>
+          Projects
+        </Typography>
+        
       </div>
 
       {/* Hover Preview Image or Default Message */}
@@ -124,32 +146,59 @@ export default function ProjectShowcase() {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: "250px",
-          height: "250px",
+          width: "1200px",
+          height: "600px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "#fff",
-          fontSize: "20px",
+          color: "#333",
+          fontSize: "50px",
           fontWeight: "bold",
           textAlign: "center",
-          background: hoveredProject ? `url(${hoveredProject.img}) center/cover no-repeat` : "rgba(0, 0, 0, 0.5)",
-          boxShadow: hoveredProject ? "0px 8px 20px rgba(0,0,0,0.4)" : "none",
-          borderRadius: "10px",
-          opacity: 0.9,
-          transition: "opacity 0.3s ease",
+          background: hoveredProject ? `url(${hoveredProject.img}) center/cover no-repeat` : "transparent",
+          boxShadow: hoveredProject ? "0px 8px 30px rgba(0,0,0,0.1)" : "none",
+          borderRadius: "2px",
+          opacity: hoveredProject ? 0.9 : 1,
+          transition: "all 0.5s ease",
           zIndex: 10,
+          border: hoveredProject ? "1px solid rgba(0, 0, 0, 0.1)" : "none",
         }}
       >
-        {!hoveredProject && "Hover over a project to preview"}
+        {!hoveredProject && (
+          <Typography 
+            variant="h1" 
+            style={{ 
+              fontSize: "4rem",
+              fontWeight: 700,
+              color: "#333",
+              letterSpacing: "0.05em",
+              opacity: 0.8,
+              fontFamily: "Gotham, sans-serif",
+              textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
+              textAlign: "center",
+              margin: "0 auto"
+            }}
+          >
+            <DecoderText text="Arjan Singh Jassal" delay={1500} />
+          </Typography>
+        )}
       </div>
 
       {/* 3D Canvas */}
       <Canvas camera={{ position: [0, 10, 15], fov: 50 }}>
         <ambientLight intensity={0.7} />
-        <spotLight position={[5, 5, 5]} intensity={1.5} />
-        <Scene onClick={setSelectedProject} onHover={setHoveredProject} />
-        <OrbitControls autoRotate autoRotateSpeed={0.3} enableZoom={false} />
+        <spotLight position={[5, 5, 5]} intensity={1.2} />
+        <Scene onClick={setSelectedProject} onHover={handleHover} />
+        <OrbitControls 
+          autoRotate 
+          autoRotateSpeed={0.2} 
+          enableZoom={false}
+          minPolarAngle={Math.PI / 3}
+          maxPolarAngle={Math.PI / 2}
+          enablePan={false}
+          minAzimuthAngle={-Math.PI / 2}
+          maxAzimuthAngle={Math.PI / 2}
+        />
       </Canvas>
 
       {/* Custom Modal */}

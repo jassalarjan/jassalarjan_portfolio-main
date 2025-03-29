@@ -17,7 +17,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background-color: var(--surface);
+      background-color: var(--backgroundLight);
       clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%);
     }
 
@@ -30,32 +30,32 @@
 
     /* Based on the Poimandres theme */
     &[data-theme='dark'] {
-      --surface: rgb(26 26 28);
-      --className: #5de4c7;
-      --comment: #a6accd;
-      --punctuation: #e4f0fb;
-      --property: #e4f0fb;
-      --boolean: #5de4c7;
-      --string: #5de4c7;
-      --operator: #add7ff;
-      --function: #5de4c7;
-      --keyword: #add7ff;
-      --literal: #fffac2;
-      --falsy: #f087bd;
-      --char: #add7ff;
+      --surface: var(--backgroundLight);
+      --className: var(--accent);
+      --comment: color-mix(in lab, var(--textBody) 60%, transparent);
+      --punctuation: var(--textBody);
+      --property: var(--textBody);
+      --boolean: var(--accent);
+      --string: var(--accent);
+      --operator: var(--primary);
+      --function: var(--accent);
+      --keyword: var(--primary);
+      --literal: var(--textTitle);
+      --falsy: var(--error);
+      --char: var(--primary);
     }
 
     &[data-theme='light'] {
-      --surface: rgb(255 255 255);
-      --comment: rgba(0 0 0 / 0.6);
-      --keyword: #00378c;
-      --string: rgb(4 98 108);
-      --boolean: rgb(4 98 108);
-      --punctuation: rgba(0 0 0 / 0.4);
-      --function: rgb(4 98 108);
-      --className: rgb(4 98 108);
-      --operator: #a8093f;
-      --char: #00378c;
+      --surface: var(--background);
+      --comment: color-mix(in lab, var(--textBody) 60%, transparent);
+      --keyword: var(--primary);
+      --string: var(--accent);
+      --boolean: var(--accent);
+      --punctuation: color-mix(in lab, var(--textBody) 40%, transparent);
+      --function: var(--accent);
+      --className: var(--accent);
+      --operator: var(--error);
+      --char: var(--primary);
     }
 
     /* stylelint-disable selector-class-pattern */

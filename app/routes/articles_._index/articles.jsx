@@ -202,3 +202,4 @@ function Barcode({ className }) {
     </svg>
   );
 }
+

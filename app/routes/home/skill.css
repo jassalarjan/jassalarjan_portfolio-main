@@ -11,6 +11,7 @@
 }
 .skills-technologies h2{
   text-align:center;
+  color: var(--textTitle);
 }
 
 /* Skill grid - dynamic column adjustments */
@@ -25,24 +26,31 @@
 
 /* Individual skill badges */
 .skill-badge {
-  background-color: white;
+  background-color: var(--backgroundLight);
   border-radius: 8px;
   padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px color-mix(in lab, var(--background) 20%, transparent);
   text-align: center;
+  transition: transform var(--durationS) ease, box-shadow var(--durationS) ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px color-mix(in lab, var(--background) 30%, transparent);
+  }
 }
 
 /* Skill progress bar */
 .skill-bar {
   height: 5px;
-  background-color: #e9ecef;
+  background-color: color-mix(in lab, var(--textBody) 20%, transparent);
   border-radius: 2.5px;
   overflow: hidden;
+  margin-top: 0.5rem;
 }
 
 .skill-level {
   height: 100%;
-  background-color: #28a745;
+  background-color: var(--accent);
   width: 0;
   transition: width 1s ease-out;
 }

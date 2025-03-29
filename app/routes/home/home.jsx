@@ -24,7 +24,7 @@ import CareerTimeline from './CareerTimeline';
 
 import { DecoderText } from '~/components/decoder-text';
 // import BubbleFooter from './BubbleFooter';
-import Proj from './Proj';
+// import Proj from '../projects/projects';
 // import ProjectShowcase from './ProjectShowcase';
 
 // Prefetch draco decoader wasm
@@ -183,7 +183,7 @@ export const Home = ({ visible: sectionVisible }) => {
           ],
         }}
       />
-      <Proj />
+      {/* <Proj /> */}
       <Footer />
     </div>
   );

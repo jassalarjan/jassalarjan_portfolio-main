@@ -30,22 +30,152 @@
     }
   }
 
+  /* Typography Styles */
+  :global(h1) {
+    color: var(--textTitle);
+    font-size: var(--fontSizeH1);
+    font-weight: var(--fontWeightBold);
+    line-height: var(--lineHeightTitle);
+    margin-bottom: var(--spaceL);
+  }
+
+  :global(h2) {
+    color: var(--textTitle);
+    font-size: var(--fontSizeH2);
+    font-weight: var(--fontWeightBold);
+    line-height: var(--lineHeightTitle);
+    margin-bottom: var(--spaceL);
+  }
+
+  :global(h3) {
+    color: var(--textTitle);
+    font-size: var(--fontSizeH3);
+    font-weight: var(--fontWeightBold);
+    line-height: var(--lineHeightTitle);
+    margin-bottom: var(--spaceM);
+  }
+
+  :global(h4) {
+    color: var(--textTitle);
+    font-size: var(--fontSizeH4);
+    font-weight: var(--fontWeightBold);
+    line-height: var(--lineHeightTitle);
+    margin-bottom: var(--spaceM);
+  }
+
+  :global(h5) {
+    color: var(--textTitle);
+    font-size: var(--fontSizeH5);
+    font-weight: var(--fontWeightBold);
+    line-height: var(--lineHeightTitle);
+    margin-bottom: var(--spaceM);
+  }
+
+  :global(p) {
+    color: var(--textBody);
+    font-size: var(--fontSizeBodyM);
+    line-height: var(--lineHeightBody);
+    margin-bottom: var(--spaceM);
+  }
+
+  :global(a) {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color var(--durationS) ease;
+
+    &:hover {
+      color: var(--accent);
+    }
+  }
+
   :global(:where(code, pre)) {
     font-family: var(--monoFontStack);
+    background-color: var(--backgroundLight);
+    color: var(--textBody);
+    padding: var(--spaceS) var(--spaceM);
+    border-radius: 4px;
   }
 
   :global(::selection) {
     background: var(--accent);
-    color: var(--black);
+    color: var(--background);
   }
 
   :global(:focus) {
-    outline: 4px solid var(--text);
+    outline: 4px solid var(--primary);
     outline-offset: 4px;
   }
 
   :global(:focus:not(:focus-visible)) {
     outline: none;
+  }
+
+  /* List Styles */
+  :global(ul), :global(ol) {
+    color: var(--textBody);
+    margin-bottom: var(--spaceM);
+    padding-left: var(--spaceL);
+  }
+
+  :global(li) {
+    margin-bottom: var(--spaceXS);
+  }
+
+  /* Blockquote Styles */
+  :global(blockquote) {
+    border-left: 4px solid var(--primary);
+    padding-left: var(--spaceM);
+    margin: var(--spaceL) 0;
+    color: var(--textBody);
+    font-style: italic;
+  }
+
+  /* Table Styles */
+  :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--spaceL) 0;
+  }
+
+  :global(th), :global(td) {
+    padding: var(--spaceM);
+    border: 1px solid var(--backgroundLight);
+    color: var(--textBody);
+  }
+
+  :global(th) {
+    background-color: var(--backgroundLight);
+    color: var(--textTitle);
+    font-weight: var(--fontWeightBold);
+  }
+
+  /* Form Element Styles */
+  :global(input), :global(textarea), :global(select) {
+    background-color: var(--backgroundLight);
+    border: 1px solid var(--backgroundLight);
+    color: var(--textBody);
+    padding: var(--spaceS) var(--spaceM);
+    border-radius: 4px;
+    transition: border-color var(--durationS) ease;
+
+    &:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+  }
+
+  :global(button) {
+    background-color: var(--primary);
+    color: var(--background);
+    border: none;
+    padding: var(--spaceS) var(--spaceM);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color var(--durationS) ease;
+
+    &:hover {
+      background-color: var(--accent);
+    }
   }
 
   @keyframes :global(fade-in) {

@@ -1,7 +1,7 @@
 body .foot {
   margin-top: 10rem;
   z-index: 1;
-  --foot-background: #000e59;
+  --foot-background: var(--backgroundLight);
 
   display: grid;
   position: relative;
@@ -38,11 +38,16 @@ body .foot .content {
 }
 body .foot .content a,
 body .foot .content p {
-  color: #f5f7fa;
+  color: var(--textBody);
   text-decoration: none;
+  transition: color var(--durationS) ease;
+
+  &:hover {
+    color: var(--accent);
+  }
 }
 body .foot .content b {
-  color: white;
+  color: var(--textTitle);
 }
 body .foot .content p {
   margin: 0;

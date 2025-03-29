@@ -29,7 +29,7 @@
     }
 
     &[data-secondary='true'] {
-      --linkColor: var(--text);
+      --linkColor: var(--textBody);
     }
   }
 }

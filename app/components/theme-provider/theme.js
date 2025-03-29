@@ -108,27 +108,27 @@ const tokensMobileSmall = {
 
 // Tokens that change based on theme
 const dark = {
-  background: 'oklch(17.76% 0 0)',
-  backgroundLight: 'oklch(21.78% 0 0)',
-  primary: 'oklch(84.42% 0.19 202.24)',
-  accent: 'oklch(84.42% 0.19 202.24)',
-  error: 'oklch(65.91% 0.249 13.76)',
-  text: 'var(--white)',
-  textTitle: 'var(--text)',
-  textBody: 'color-mix(in lab, var(--text) 80%, transparent)',
-  textLight: 'color-mix(in lab, var(--text) 60%, transparent)',
+  background: '#121E36', // Midnight Blue - Deep tech look
+  backgroundLight: '#1F1F1F', // Steel Gray - Subtle depth
+  primary: '#007BFF', // Electric Blue - Professional & futuristic
+  accent: '#001F3F', // Deep Navy - Professional & sophisticated
+  error: '#FF6A00', // Fiery Orange - Bold error states
+  text: '#E3E3E3', // Soft Silver - Clean, modern text
+  textTitle: '#E3E3E3', // Same as text for titles
+  textBody: 'color-mix(in lab, var(--text) 85%, transparent)', // Slightly transparent for body text
+  textLight: 'color-mix(in lab, var(--text) 65%, transparent)', // More transparent for secondary text
 };
 
 const light = {
-  background: 'oklch(96.12% 0 0)',
-  backgroundLight: 'var(--white)',
-  primary: 'var(--black)',
-  accent: 'oklch(84.42% 0.19 202.24)',
-  error: 'oklch(63.17% 0.259 25.41)',
-  text: 'var(--black)',
-  textTitle: 'color-mix(in lab, var(--text) 90%, transparent)',
-  textBody: 'color-mix(in lab, var(--text) 75%, transparent)',
-  textLight: 'color-mix(in lab, var(--text) 55%, transparent)',
+  background: '#FFFFFF', // Pure white for clean design
+  backgroundLight: '#E3E3E3', // Soft Silver for depth
+  primary: '#121E36', // Midnight Blue for primary elements
+  accent: '#001F3F', // Deep Navy for accents
+  error: '#FF6A00', // Fiery Orange for error states
+  text: '#2B2B2B', // Graphite Gray for text
+  textTitle: '#2B2B2B', // Same as text for titles
+  textBody: 'color-mix(in lab, var(--text) 75%, transparent)', // Slightly transparent for body text
+  textLight: 'color-mix(in lab, var(--text) 55%, transparent)', // More transparent for secondary text
 };
 
 export const tokens = {
