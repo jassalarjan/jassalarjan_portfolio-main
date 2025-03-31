@@ -56,7 +56,7 @@
 
     &[data-secondary='true'] {
       --buttonSpace: 10px;
-      --buttonTextColor: var(--primary);
+      --buttonTextColor: var(--buttonTextColor);
 
       background: none;
       padding-left: var(--buttonSpace);
@@ -70,7 +70,7 @@
         height: calc((32 / 16) * 1rem);
         position: absolute;
         inset: 0;
-        background-color: color-mix(in lab, var(--primary) 20%, transparent);
+        background-color: color-mix(in lab, var(--buttonBgColor) 20%, transparent);
         transform: scale3d(0, 1, 1);
         transform-origin: right;
         clip-path: none;
@@ -109,17 +109,19 @@
       align-items: center;
       justify-content: center;
       padding: 0;
+      background: var(--navButtonBgColor);
 
       &:hover {
         transform: none;
+        background: var(--navButtonBgColor);
       }
 
       &::after {
-        background: color-mix(in lab, var(--text) 0%, transparent);
+        background: var(--navButtonBgColor);
       }
 
       &:hover::after {
-        background: color-mix(in lab, var(--text) 10%, transparent);
+        background: var(--navButtonBgColor);
       }
     }
 

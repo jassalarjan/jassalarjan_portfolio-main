@@ -390,7 +390,7 @@ const Device = ({
       let playAnimation;
 
       const [placeholder, gltf] = await Promise.all([
-        await textureLoader.loadAsync(texture.placeholder),
+        await textureLoader.loadAsync(texture.placeholder || texture.src),
         await modelLoader.loadAsync(url),
       ]);
 
@@ -413,8 +413,11 @@ const Device = ({
           applyScreenTexture(placeholder, placeholderScreen.current);
 
           loadFullResTexture = async () => {
-            const image = await resolveSrcFromSrcSet(texture);
-            const fullSize = await textureLoader.loadAsync(image);
+            // Just use the provided src directly instead of resolving from srcSet
+            const fullSize = texture.src ? 
+              await textureLoader.loadAsync(texture.src) : 
+              placeholder;
+              
             await applyScreenTexture(fullSize, node);
 
             animate(1, 0, {

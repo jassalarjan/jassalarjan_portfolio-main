@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaChevronLeft, FaChevronRight, FaQuoteRight } from 'react-icons/fa';
 import './TestimonialCardCarousel.css';
-import avt1 from '~/assets/profile-placeholder.jpg';
+import profileImage from '~/assets/profile.jpg';
 const testimonials = [
   {
     id: 1,
@@ -10,7 +10,7 @@ const testimonials = [
     position: 'Director,Safety and Quality Forum,IEI',
     content:
       'It is my utmost pleasure to confirm the testimonial for Mr. Arjan Singh Jassal. Over the past three years of my interaction with him, he has consistently demonstrated exceptional skills and unwavering dedication in the field of IT. His strong problem-solving abilities, innovative mindset, and commitment to excellence set him apart. Arjan is an energetic and reliable professional who approaches every challenge with enthusiasm and determination. His passion for technology and continuous learning makes him a valuable asset to any team or organization.',
-    avatar: avt1,
+    avatar: profileImage,
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const testimonials = [
     position: 'CTO, Digital Solutions Inc.',
     content:
       'I was impressed by the clean, efficient code and the ability to solve complex problems. This developer is a valuable asset to any team.',
-    avatar: avt1,
+    avatar: profileImage,
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const testimonials = [
     position: 'Project Manager, InnovateTech',
     content:
       'The level of communication and project management skills displayed by this developer made our collaboration smooth and productive.',
-    avatar: avt1,
+    avatar: profileImage,
   },
   {
     id: 4,
@@ -34,7 +34,7 @@ const testimonials = [
     position: 'Lead Designer, Creative Minds',
     content:
       'Their ability to translate design concepts into functional, beautiful websites is remarkable. A true professional who delivers outstanding results.',
-    avatar: avt1,
+    avatar: profileImage,
   },
 ];
 

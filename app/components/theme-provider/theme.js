@@ -4,6 +4,33 @@ import { pxToRem } from '~/utils/style';
 const baseTokens = {
   black: 'oklch(0% 0 0)',
   white: 'oklch(100% 0 0)',
+  // Element-specific colors that remain consistent
+  // Heading colors
+  h1Color: 'var(--h1Color)', // Use theme variable
+  h2Color: 'var(--h2Color)', // Use theme variable
+  h3Color: 'var(--h3Color)', // Use theme variable
+  h4Color: 'var(--h4Color)', // Use theme variable
+  h5Color: 'var(--h5Color)', // Use theme variable
+  
+  // Text colors
+  paragraphColor: 'var(--paragraphColor)', // Use theme variable
+  linkColor: 'var(--linkColor)', // Use theme variable
+  linkHoverColor: 'var(--linkHoverColor)', // Use theme variable
+  accentColor: 'var(--accent)', // Use theme variable
+  secondaryTextColor: 'var(--secondaryTextColor)', // Use theme variable
+  
+  // Special elements
+  navTextColor: 'var(--navTextColor)', // Use theme variable
+  buttonTextColor: 'var(--buttonTextColor)', // Use theme variable
+  buttonBgColor: 'var(--buttonBgColor)', // Use theme variable
+  buttonHoverBgColor: 'var(--buttonHoverBgColor)', // Use theme variable
+  navButtonBgColor: 'var(--navButtonBgColor)', // New variable for nav button background
+  
+  // Form elements
+  inputTextColor: 'var(--inputTextColor)', // Use theme variable
+  inputBorderColor: 'var(--inputBorderColor)', // Use theme variable
+  inputFocusBorderColor: 'var(--inputFocusBorderColor)', // Use theme variable
+  
   bezierFastoutSlowin: 'cubic-bezier(0.4, 0.0, 0.2, 1)',
   durationXS: '200ms',
   durationS: '300ms',
@@ -108,27 +135,95 @@ const tokensMobileSmall = {
 
 // Tokens that change based on theme
 const dark = {
-  background: '#121E36', // Midnight Blue - Deep tech look
-  backgroundLight: '#1F1F1F', // Steel Gray - Subtle depth
-  primary: '#007BFF', // Electric Blue - Professional & futuristic
-  accent: '#001F3F', // Deep Navy - Professional & sophisticated
-  error: '#FF6A00', // Fiery Orange - Bold error states
-  text: '#E3E3E3', // Soft Silver - Clean, modern text
-  textTitle: '#E3E3E3', // Same as text for titles
-  textBody: 'color-mix(in lab, var(--text) 85%, transparent)', // Slightly transparent for body text
-  textLight: 'color-mix(in lab, var(--text) 65%, transparent)', // More transparent for secondary text
+  background: '#1A1A1A', // Deep dark background
+  backgroundLight: '#2D2D2D', // Slightly lighter dark for cards
+  backgroundDark: '#121212', // Even darker background
+  backgroundA: 'rgba(26, 26, 26, 0.8)', // Semi-transparent background
+  backgroundA50: 'rgba(26, 26, 26, 0.5)', // 50% transparent background
+  primary: '#FFE983', // Warm yellow for primary accent
+  accent: '#FFE983', // Using same color for accent to ensure consistency
+  error: '#FF6A00', // Fiery Orange for error states
+  text: '#FFFFFF', // Pure white for text
+  
+  // Text colors
+  colorTextTitle: '#FFFFFF', // White for titles
+  colorTextBody: '#FFFFFF', // White for body text
+  colorTextLight: '#FFFFFF', // White for light text
+  
+  // Border colors
+  borderLight: 'rgba(255, 255, 255, 0.1)', // Light border
+  borderDark: 'rgba(255, 255, 255, 0.2)', // Dark border
+  
+  // Heading colors - Gradient from warm yellow to white
+  h1Color: '#FFE983', // Warm yellow for H1
+  h2Color: '#FFE983', // Warm yellow for H2
+  h3Color: 'white', // Warm yellow for H3
+  h4Color: '#FFE983', // Warm yellow for H4
+  h5Color: '#FFE983', // Warm yellow for H5
+  
+  // Text colors
+  paragraphColor: '#FFFFFF', // White for paragraphs (was black)
+  linkColor: '#FFE983', // Warm yellow for links
+  linkHoverColor: '#FFD700', // Slightly darker yellow for hover
+  secondaryTextColor: '#CCCCCC', // Light gray for secondary text
+  
+  // Special elements
+  navTextColor: '#FFFFFF', // White for navigation (was black)
+  buttonTextColor: '#FFFFFF', // White for button text
+  buttonBgColor: '#FFE983', // Warm yellow for button background
+  buttonHoverBgColor: '#FFD700', // Slightly darker yellow for hover
+  navButtonBgColor: 'transparent', // Transparent for nav buttons
+  
+  // Form elements
+  inputTextColor: '#FFFFFF', // White for input text (was black)
+  inputBorderColor: '#404040', // Dark gray for input borders
+  inputFocusBorderColor: '#FFE983', // Warm yellow for input focus
 };
 
 const light = {
-  background: '#FFFFFF', // Pure white for clean design
-  backgroundLight: '#E3E3E3', // Soft Silver for depth
-  primary: '#121E36', // Midnight Blue for primary elements
-  accent: '#001F3F', // Deep Navy for accents
-  error: '#FF6A00', // Fiery Orange for error states
-  text: '#2B2B2B', // Graphite Gray for text
-  textTitle: '#2B2B2B', // Same as text for titles
-  textBody: 'color-mix(in lab, var(--text) 75%, transparent)', // Slightly transparent for body text
-  textLight: 'color-mix(in lab, var(--text) 55%, transparent)', // More transparent for secondary text
+  background: '#FFFFFF',
+  backgroundLight: '#F8F9FA',
+  backgroundDark: '#E2E8F0',
+  backgroundA: 'rgba(255, 255, 255, 0.8)',
+  backgroundA50: 'rgba(255, 255, 255, 0.5)',
+  primary: 'maroon', // Maroon for primary
+  accent: 'maroon', // Using same color for accent to ensure consistency
+  error: '#FF6A00',
+  text: '#000000', // Pure black for text
+  
+  // Text colors
+  colorTextTitle: '#000000', // Black for titles
+  colorTextBody: '#000000', // Black for body text
+  colorTextLight: '#4A5568', // Dark gray for light text
+  
+  // Border colors
+  borderLight: 'rgba(0, 0, 0, 0.1)', // Light border
+  borderDark: 'rgba(0, 0, 0, 0.2)', // Dark border
+  
+  // Heading colors - Maroon gradient
+  h1Color: 'maroon', // Maroon for H1
+  h2Color: 'maroon', // Maroon for H2
+  h3Color: '#303F9F', // Medium indigo for H3
+  h4Color: '#3949AB', // Lighter indigo for H4
+  h5Color: '#3F51B5', // Lightest indigo for H5
+  
+  // Text colors
+  paragraphColor: '#000000', // Pure black for paragraphs
+  linkColor: 'maroon', // Maroon for links
+  linkHoverColor: '#800000', // Darker maroon for hover
+  secondaryTextColor: '#8892B0', // Muted blue-gray for secondary text
+  
+  // Special elements
+  navTextColor: '#000000', // Pure black for navigation
+  buttonTextColor: '#FFFFFF', // White for button text
+  buttonBgColor: 'maroon', // Maroon for button background
+  buttonHoverBgColor: '#800000', // Darker maroon for hover
+  navButtonBgColor: 'transparent', // Transparent for nav buttons
+  
+  // Form elements
+  inputTextColor: '#000000', // Pure black for input text
+  inputBorderColor: '#E2E8F0', // Light gray for input borders
+  inputFocusBorderColor: 'maroon', // Maroon for input focus
 };
 
 export const tokens = {

@@ -8,7 +8,7 @@ import { useTheme } from '~/components/theme-provider';
 import { Transition } from '~/components/transition';
 import { Loader } from '~/components/loader';
 import { useWindowSize } from '~/hooks';
-import { Suspense, lazy, useState } from 'react';
+import { Suspense, lazy, useState, useEffect } from 'react';
 import { cssProps, media } from '~/utils/style';
 import { useHydrated } from '~/hooks/useHydrated';
 import katakana from './katakana.svg';
@@ -33,6 +33,7 @@ export function ProjectSummary({
 }) {
   const [focused, setFocused] = useState(false);
   const [modelLoaded, setModelLoaded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const { theme } = useTheme();
   const { width } = useWindowSize();
   const isHydrated = useHydrated();
@@ -42,6 +43,15 @@ export function ProjectSummary({
   const indexText = index < 10 ? `0${index}` : index;
   const phoneSizes = `(max-width: ${media.tablet}px) 30vw, 20vw`;
   const laptopSizes = `(max-width: ${media.tablet}px) 80vw, 40vw`;
+
+  useEffect(() => {
+    if (sectionVisible) {
+      const timer = setTimeout(() => {
+        setModelLoaded(true);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [sectionVisible]);
 
   function handleModelLoad() {
     setModelLoaded(true);
@@ -65,7 +75,11 @@ export function ProjectSummary({
 
   function renderDetails(visible) {
     return (
-      <div className={styles.details}>
+      <div 
+        className={styles.details}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <div aria-hidden className={styles.index}>
           <Divider
             notchWidth="64px"
@@ -90,7 +104,15 @@ export function ProjectSummary({
           {description}
         </Text>
         <div className={styles.button} data-visible={visible}>
-          <Button iconHoverShift href={buttonLink} iconEnd="arrow-right">
+          <Button 
+            iconHoverShift 
+            href={buttonLink} 
+            iconEnd="arrow-right"
+            style={{
+              transform: isHovered ? 'translateX(10px)' : 'translateX(0)',
+              transition: 'transform 0.3s ease'
+            }}
+          >
             {buttonText}
           </Button>
         </div>
@@ -100,7 +122,11 @@ export function ProjectSummary({
 
   function renderPreview(visible) {
     return (
-      <div className={styles.preview}>
+      <div 
+        className={styles.preview}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         {model.type === 'laptop' && (
           <>
             {renderKatakana('laptop', visible)}
@@ -142,14 +168,13 @@ export function ProjectSummary({
                 <Suspense>
                   <Model
                     alt={model.alt}
-                    cameraPosition={{ x: 0, y: 0, z: 11.5 }}
-                    showDelay={300}
+                    cameraPosition={{ x: 0, y: 0, z: 8 }}
+                    showDelay={700}
                     onLoad={handleModelLoad}
                     show={visible}
                     models={[
                       {
                         ...deviceModels.phone,
-                        position: { x: -0.6, y: 1.1, z: 0 },
                         texture: {
                           ...model.textures[0],
                           sizes: phoneSizes,
@@ -157,7 +182,6 @@ export function ProjectSummary({
                       },
                       {
                         ...deviceModels.phone,
-                        position: { x: 0.6, y: -0.5, z: 0.3 },
                         texture: {
                           ...model.textures[1],
                           sizes: phoneSizes,

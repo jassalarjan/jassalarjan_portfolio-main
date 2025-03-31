@@ -1,8 +1,10 @@
 {
   "name": "Arjan Singh Jassal",
   "role": "Developer",
-  "disciplines": ["Designer", "Prototyper", "Video Editor", "Social Media Handler", "Leader"],
+  "disciplines": ["Designer", "Video Editor", "Leader"],
   "url": "https://arjansinghjassal.xyz",
+  "location": "New Delhi, India",
+  "timezone": "IST",
   "bluesky": "arjansinghjassal.xyz",
   "figma": "@Arjan",
   "github": "jassalarjan",
@@ -10,5 +12,10 @@
   "phone": "+91 8447054647",
   "email": "jassalarjansingh@gmail.com",
   "repo": "https://github.com/HamishMW/portfolio",
+  "socialLinks": {
+    "github": "https://github.com/jassalarjan",
+    "linkedin": "https://www.linkedin.com/in/arjan-singh-jassal-296b9a250/",
+    "twitter": "https://twitter.com/arjansingh"
+  },
   "ascii": "__  __  __\n\u005C \u005C \u005C \u005C \u005C\u2215\n \u005C \u005C\u2215\u005C \u005C\n  \u005C\u2215  \u005C\u2215\n"
 }

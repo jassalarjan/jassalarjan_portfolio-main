@@ -58,7 +58,7 @@
 
   .navLink {
     padding: var(--spaceM);
-    color: color-mix(in lab, var(--text) 80%, transparent);
+    color: color-mix(in lab, var(--colorTextBody) 80%, transparent);
     font-weight: var(--fontWeightMedium);
     font-size: var(--headerNavFontSize);
     text-decoration: none;
@@ -71,7 +71,7 @@
     &:hover,
     &:active,
     &[aria-current='page'] {
-      color: var(--textBody);
+      color: var(--colorTextBody);
     }
 
     &::after {
@@ -80,7 +80,7 @@
       inset-inline-start: var(--spaceS);
       inset-inline-end: var(--spaceS);
       block-size: 4px;
-      background: var(--accent);
+      background: var(--primary);
       transform: scaleY(0) translateZ(0);
       transform-origin: bottom;
     }
@@ -130,12 +130,12 @@
     padding: var(--spaceS);
     width: var(--space2XL);
     height: var(--space2XL);
-    color: var(--textLight);
+    color: var(--colorTextLight);
     transition: color var(--durationM) var(--bezierFastoutSlowin);
 
     &:hover,
     &:active {
-      color: var(--accent);
+      color: var(--primary);
     }
   }
 
@@ -149,7 +149,7 @@
 
     position: fixed;
     inset: 0;
-    background: color-mix(in lab, var(--background) 70%, transparent);
+    background: color-mix(in lab, var(--backgroundA) 70%, transparent);
     transform: translate3d(0, -100%, 0);
     transition-property: background;
     transition-duration: var(--durationL);
@@ -179,7 +179,7 @@
     font-size: var(--headerNavFontSize);
     text-align: center;
     text-decoration: none;
-    color: var(--textBody);
+    color: var(--colorTextBody);
     padding: var(--spaceL);
     opacity: 0;
     transition-property: opacity;
@@ -209,7 +209,7 @@
       right: var(--space3XL);
       left: var(--space3XL);
       height: 4px;
-      background: var(--accent);
+      background: var(--primary);
       transform: scaleX(0) translateY(-1px);
       transform-origin: right;
     }

@@ -1,35 +1,40 @@
 @layer components {
   .heading {
     line-height: var(--lineHeightTitle);
-    color: var(--textTitle);
 
     &[data-level='0'] {
       letter-spacing: -0.05em;
       font-size: var(--fontSizeH0);
+      color: var(--h1Color);
     }
 
     &[data-level='1'] {
       letter-spacing: -0.05em;
       font-size: var(--fontSizeH1);
+      color: var(--h1Color);
     }
 
     &[data-level='2'] {
       font-size: var(--fontSizeH2);
       letter-spacing: -0.04em;
+      color: var(--h2Color);
     }
 
     &[data-level='3'] {
       font-size: var(--fontSizeH3);
       letter-spacing: -0.02em;
+      color: var(--h3Color);
     }
 
     &[data-level='4'] {
       font-size: var(--fontSizeH4);
       letter-spacing: -0.01em;
+      color: var(--h4Color);
     }
 
     &[data-level='5'] {
       font-size: var(--fontSizeH5);
+      color: var(--h5Color);
     }
 
     &[data-align='auto'] {

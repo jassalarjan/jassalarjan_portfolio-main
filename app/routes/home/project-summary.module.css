@@ -34,7 +34,6 @@
 
 .content {
   --textColumnWidth: 36%;
-
   width: 100%;
   max-width: var(--maxWidthL);
   align-items: center;
@@ -42,6 +41,8 @@
   display: grid;
   grid-template-columns: var(--textColumnWidth) 1fr;
   grid-column-gap: var(--space2XL);
+  position: relative;
+  transition: transform 0.3s ease;
 
   .summary[data-alternate='true'] & {
     grid-template-columns: 1fr var(--textColumnWidth);
@@ -65,6 +66,20 @@
 .details {
   z-index: var(--zIndex1);
   position: relative;
+  background: var(--backgroundDark);
+  padding: var(--spaceL);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  @media (prefers-color-scheme: light) {
+    background: color-mix(in lab, var(--background) 92%, #000);
+  }
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  }
 
   @media (--mediaTablet) {
     flex: 0 0 auto;
@@ -83,6 +98,11 @@
   justify-content: center;
   height: 100%;
   width: 100%;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
 }
 
 .model {

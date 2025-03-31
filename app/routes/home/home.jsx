@@ -1,17 +1,5 @@
-import gamestackTexture2Large from '~/assets/gamestack-list-large.jpg';
-import gamestackTexture2Placeholder from '~/assets/gamestack-list-placeholder.jpg';
-import gamestackTexture2 from '~/assets/gamestack-list.jpg';
-import gamestackTextureLarge from '~/assets/gamestack-login-large.jpg';
-import gamestackTexturePlaceholder from '~/assets/gamestack-login-placeholder.jpg';
-import gamestackTexture from '~/assets/gamestack-login.jpg';
-import sliceTextureLarge from '~/assets/slice-app-large.jpg';
-import sliceTexturePlaceholder from '~/assets/slice-app-placeholder.jpg';
-import sliceTexture from '~/assets/slice-app.jpg';
-import sprTextureLarge from '~/assets/spr-lesson-builder-dark-large.jpg';
-import sprTexturePlaceholder from '~/assets/spr-lesson-builder-dark-placeholder.jpg';
-import sprTexture from '~/assets/spr-lesson-builder-dark.jpg';
+import profileImg from '~/assets/profile.jpg';
 import { Footer } from '~/components/footer';
-import { Button } from '~/components/button';
 import { baseMeta } from '~/utils/meta';
 import { Intro } from './intro';
 import { Profile } from './profile';
@@ -21,11 +9,13 @@ import config from '~/config.json';
 import styles from './home.module.css';
 import Skill from './skill';
 import CareerTimeline from './CareerTimeline';
-
 import { DecoderText } from '~/components/decoder-text';
-// import BubbleFooter from './BubbleFooter';
-// import Proj from '../projects/projects';
-// import ProjectShowcase from './ProjectShowcase';
+
+// Import project images
+import sprImage from '~/assets/slice-app-large.jpg';
+import gamestackLoginImage from '~/assets/gamestack-login.jpg';
+import gamestackListImage from '~/assets/gamestack-list.jpg';
+import sliceAppImage from '~/assets/slice-app.jpg';
 
 // Prefetch draco decoader wasm
 export const links = () => {
@@ -115,7 +105,6 @@ export const Home = ({ visible: sectionVisible }) => {
       {/* <ProjectShowcase /> */}
       <CareerTimeline id="career" />
       <Skill id="skill" />
-
       <ProjectSummary
         id="project-1"
         sectionRef={projectOne}
@@ -126,14 +115,15 @@ export const Home = ({ visible: sectionVisible }) => {
         }
         description="Designing a platform to deliver better audits"
         buttonText="View project"
-        buttonLink="/projects/smart-sparrow"
+        buttonLink="https://www.zingenterprises.co.in/"
         model={{
           type: 'laptop',
           alt: 'Zing Enterprises',
+          key: 'project-1-model',
           textures: [
             {
-              srcSet: `${sprTexture} 1280w, ${sprTextureLarge} 2560w`,
-              placeholder: sprTexturePlaceholder,
+              src: sprImage,
+              placeholder: sprImage,
             },
           ],
         }}
@@ -151,14 +141,15 @@ export const Home = ({ visible: sectionVisible }) => {
         model={{
           type: 'phone',
           alt: 'App login screen',
+          key: 'project-2-model',
           textures: [
             {
-              srcSet: `${gamestackTexture} 375w, ${gamestackTextureLarge} 750w`,
-              placeholder: gamestackTexturePlaceholder,
+              src: gamestackLoginImage,
+              placeholder: gamestackLoginImage,
             },
             {
-              srcSet: `${gamestackTexture2} 375w, ${gamestackTexture2Large} 750w`,
-              placeholder: gamestackTexture2Placeholder,
+              src: gamestackListImage,
+              placeholder: gamestackListImage,
             },
           ],
         }}
@@ -169,21 +160,21 @@ export const Home = ({ visible: sectionVisible }) => {
         visible={visibleSections.includes(projectThree.current)}
         index={3}
         title={<DecoderText text="Safety Convention 2023" delay={1500} />}
-        // description="Safety Convention is being organized to arrange a platform to collaborate with industries, organizations, corporates and individuals with focus on the most important 'thing' required these days; that is relearning and re-emphasizing the basics."
         buttonText="View project"
-        description="Safety Convention was organized to arrange a platform to collaborate with industries, organizations, corporates and individuals with focus on the most important “thing” required these days; that is relearning and re-emphasizing the basics."
+        buttonLink="https://www.sqfiei.in/safety_convention_2023/index.php"
+        description='Safety Convention was organized to arrange a platform to collaborate with industries, organizations, corporates and individuals with focus on the most important "thing" required these days; that is relearning and re-emphasizing the basics.'
         model={{
           type: 'laptop',
           alt: 'Annotating a biomedical image in the Slice app',
+          key: 'project-3-model',
           textures: [
             {
-              srcSet: `${sliceTexture} 800w, ${sliceTextureLarge} 1920w`,
-              placeholder: sliceTexturePlaceholder,
+              src: sliceAppImage,
+              placeholder: sliceAppImage,
             },
           ],
         }}
       />
-      {/* <Proj /> */}
       <Footer />
     </div>
   );

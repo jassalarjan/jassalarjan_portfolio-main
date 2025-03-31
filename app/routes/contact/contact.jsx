@@ -1,243 +1,133 @@
-import { Button } from '~/components/button';
-import { DecoderText } from '~/components/decoder-text';
-import { Divider } from '~/components/divider';
-import { Footer } from '~/components/footer';
-import { Heading } from '~/components/heading';
-import { Icon } from '~/components/icon';
-import { Input } from '~/components/input';
+import React, { Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+import { Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
 import { Section } from '~/components/section';
+import { Heading } from '~/components/heading';
 import { Text } from '~/components/text';
-import { tokens } from '~/components/theme-provider/theme';
-import { Transition } from '~/components/transition';
-import { useFormInput } from '~/hooks';
-import { useRef } from 'react';
-import { cssProps, msToNum, numToMs } from '~/utils/style';
 import { baseMeta } from '~/utils/meta';
-import { Form, useActionData, useNavigation } from '@remix-run/react';
-import { json } from '@remix-run/cloudflare';
-import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
+import { useTheme } from '~/components/theme-provider';
+import config from '~/config.json';
+import FloatingCube from './FloatingCube';
 import styles from './contact.module.css';
-
+import { Footer } from '~/components/footer';
 export const meta = () => {
   return baseMeta({
     title: 'Contact',
-    description:
-      'Send me a message if you’re interested in discussing a project or if you just want to say hi',
+    description: 'Get in touch with me for any inquiries or collaboration opportunities.',
   });
 };
-
-const MAX_EMAIL_LENGTH = 512;
-const MAX_MESSAGE_LENGTH = 4096;
-const EMAIL_PATTERN = /(.+)@(.+){2,}\.(.+){2,}/;
-
-export async function action({ context, request }) {
-  const ses = new SESClient({
-    region: 'us-east-1',
-    credentials: {
-      accessKeyId: context.cloudflare.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: context.cloudflare.env.AWS_SECRET_ACCESS_KEY,
-    },
-  });
-
-  const formData = await request.formData();
-  const isBot = String(formData.get('name'));
-  const email = String(formData.get('email'));
-  const message = String(formData.get('message'));
-  const errors = {};
-
-  // Return without sending if a bot trips the honeypot
-  if (isBot) return json({ success: true });
-
-  // Handle input validation on the server
-  if (!email || !EMAIL_PATTERN.test(email)) {
-    errors.email = 'Please enter a valid email address.';
-  }
-
-  if (!message) {
-    errors.message = 'Please enter a message.';
-  }
-
-  if (email.length > MAX_EMAIL_LENGTH) {
-    errors.email = `Email address must be shorter than ${MAX_EMAIL_LENGTH} characters.`;
-  }
-
-  if (message.length > MAX_MESSAGE_LENGTH) {
-    errors.message = `Message must be shorter than ${MAX_MESSAGE_LENGTH} characters.`;
-  }
-
-  if (Object.keys(errors).length > 0) {
-    return json({ errors });
-  }
-
-  // Send email via Amazon SES
-  await ses.send(
-    new SendEmailCommand({
-      Destination: {
-        ToAddresses: [context.cloudflare.env.EMAIL],
-      },
-      Message: {
-        Body: {
-          Text: {
-            Data: `From: ${email}\n\n${message}`,
-          },
-        },
-        Subject: {
-          Data: `Portfolio message from ${email}`,
-        },
-      },
-      Source: `Portfolio <${context.cloudflare.env.FROM_EMAIL}>`,
-      ReplyToAddresses: [email],
-    })
-  );
-
-  return json({ success: true });
-}
 
 export const Contact = () => {
-  const errorRef = useRef();
-  const email = useFormInput('');
-  const message = useFormInput('');
-  const initDelay = tokens.base.durationS;
-  const actionData = useActionData();
-  const { state } = useNavigation();
-  const sending = state === 'submitting';
-
+  const { theme } = useTheme();
+  
   return (
-    <Section className={styles.contact}>
-      <Transition unmount in={!actionData?.success} timeout={1600}>
-        {({ status, nodeRef }) => (
-          <Form
-            unstable_viewTransition
-            className={styles.form}
-            method="post"
-            ref={nodeRef}
-          >
-            <Heading
-              className={styles.title}
-              data-status={status}
-              level={3}
-              as="h1"
-              style={getDelay(tokens.base.durationXS, initDelay, 0.3)}
-            >
-              <DecoderText text="Say hello" start={status !== 'exited'} delay={300} />
-            </Heading>
-            <Divider
-              className={styles.divider}
-              data-status={status}
-              style={getDelay(tokens.base.durationXS, initDelay, 0.4)}
-            />
-            {/* Hidden honeypot field to identify bots */}
-            <Input
-              className={styles.botkiller}
-              label="Name"
-              name="name"
-              maxLength={MAX_EMAIL_LENGTH}
-            />
-            <Input
-              required
-              className={styles.input}
-              data-status={status}
-              style={getDelay(tokens.base.durationXS, initDelay)}
-              autoComplete="email"
-              label="Your email"
-              type="email"
-              name="email"
-              maxLength={MAX_EMAIL_LENGTH}
-              {...email}
-            />
-            <Input
-              required
-              multiline
-              className={styles.input}
-              data-status={status}
-              style={getDelay(tokens.base.durationS, initDelay)}
-              autoComplete="off"
-              label="Message"
-              name="message"
-              maxLength={MAX_MESSAGE_LENGTH}
-              {...message}
-            />
-            <Transition
-              unmount
-              in={!sending && actionData?.errors}
-              timeout={msToNum(tokens.base.durationM)}
-            >
-              {({ status: errorStatus, nodeRef }) => (
-                <div
-                  className={styles.formError}
-                  ref={nodeRef}
-                  data-status={errorStatus}
-                  style={cssProps({
-                    height: errorStatus ? errorRef.current?.offsetHeight : 0,
-                  })}
-                >
-                  <div className={styles.formErrorContent} ref={errorRef}>
-                    <div className={styles.formErrorMessage}>
-                      <Icon className={styles.formErrorIcon} icon="error" />
-                      {actionData?.errors?.email}
-                      {actionData?.errors?.message}
-                    </div>
-                  </div>
+    <div className={styles.contact}>
+      {/* 3D Canvas Background */}
+      <div className={styles.canvasContainer}>
+        <Canvas camera={{ position: [0, 0, 5] }}>
+          <ambientLight intensity={theme === 'dark' ? 0.8 : 0.5} />
+          <pointLight position={[10, 10, 10]} intensity={theme === 'dark' ? 1.5 : 1} color={theme === 'dark' ? '#ffffff' : '#4834d4'} />
+          <pointLight position={[-10, -10, -10]} intensity={theme === 'dark' ? 0.8 : 0.5} color={theme === 'dark' ? '#a29bfe' : '#3867d6'} />
+          <Suspense fallback={null}>
+            <FloatingCube />
+          </Suspense>
+          <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
+        </Canvas>
+      </div>
+
+      {/* Content */}
+      <Section className={styles.contactSection}>
+        <div className={styles.contactContent}>
+          <Heading level={2} weight="bold" className={styles.title}>
+            Let's Connect
+          </Heading>
+          <Text size="5" className={styles.description}>
+            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+          </Text>
+
+          <div className={styles.contactGrid}>
+            {/* Contact Information */}
+            <div className={styles.contactInfo}>
+              <br />
+              <Heading level={4} weight="medium" className={styles.subtitle}>
+                Contact Information
+              </Heading>
+              
+              <div className={styles.contactItem}>
+                <div className={styles.iconWrapper}>
+                  <Mail className={styles.icon} />
                 </div>
-              )}
-            </Transition>
-            <Button
-              className={styles.button}
-              data-status={status}
-              data-sending={sending}
-              style={getDelay(tokens.base.durationM, initDelay)}
-              disabled={sending}
-              loading={sending}
-              loadingText="Sending..."
-              icon="send"
-              type="submit"
-            >
-              Send message
-            </Button>
-          </Form>
-        )}
-      </Transition>
-      <Transition unmount in={actionData?.success}>
-        {({ status, nodeRef }) => (
-          <div className={styles.complete} aria-live="polite" ref={nodeRef}>
-            <Heading
-              level={3}
-              as="h3"
-              className={styles.completeTitle}
-              data-status={status}
-            >
-              Message Sent
-            </Heading>
-            <Text
-              size="l"
-              as="p"
-              className={styles.completeText}
-              data-status={status}
-              style={getDelay(tokens.base.durationXS)}
-            >
-              I’ll get back to you within a couple days, sit tight
-            </Text>
-            <Button
-              secondary
-              iconHoverShift
-              className={styles.completeButton}
-              data-status={status}
-              style={getDelay(tokens.base.durationM)}
-              href="/"
-              icon="chevron-right"
-            >
-              Back to homepage
-            </Button>
+                <div>
+                  <Text size="s" className={styles.label}>Email: </Text>
+                  <Text size="m">{config.email || 'jassalarjansingh@gmail.com'}</Text>
+                </div>
+              </div>
+
+              <div className={styles.contactItem}>
+                <div className={styles.iconWrapper}>
+                  <Phone className={styles.icon} />
+                </div>
+                <div> 
+                  <Text size="s" className={styles.label}>Phone: </Text>
+                  <Text size="m">{config.phone || '+91 8447054647'}</Text>
+                </div>
+              </div>
+
+              <div className={styles.contactItem}>
+                <div className={styles.iconWrapper}>
+                  <MapPin className={styles.icon} />
+                </div>
+                <div>
+                  <Text size="s" className={styles.label}>Location: </Text>
+                  <Text size="m">{config.location || 'New Delhi, India'}</Text>
+                </div>
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className={styles.socialLinks}>
+              <Heading level={3} weight="medium" className={styles.subtitle}>
+                Connect With Me
+              </Heading>
+              <div className={styles.socialGrid}>
+                {config.socialLinks?.github && (
+                  <a href={config.socialLinks.github} className={styles.socialLink} target="_blank" rel="noreferrer">
+                    <Github className={styles.socialIcon} />
+                    <Text size="s">GitHub</Text>
+                  </a>
+                )}
+                {config.socialLinks?.linkedin && (
+                  <a href={config.socialLinks.linkedin} className={styles.socialLink} target="_blank" rel="noreferrer">
+                    <Linkedin className={styles.socialIcon} />
+                    <Text size="s">LinkedIn</Text>
+                  </a>
+                )}
+                {config.socialLinks?.twitter && (
+                  <a href={config.socialLinks.twitter} className={styles.socialLink} target="_blank" rel="noreferrer">
+                    <Twitter className={styles.socialIcon} />
+                    <Text size="s">Twitter</Text>
+                  </a>
+                )}
+              </div>
+
+              <div className={styles.officeHours}>
+                <Heading level={5}  className={styles.officeTitle}>
+                  Available Hours
+                </Heading>
+                <Text size="m" className={styles.officeTime}>
+                  Monday - Friday
+                </Text>
+                <Text size="m" className={styles.officeTime}>
+                  9:00 AM - 5:00 PM {config.timezone || 'PST'}
+                </Text>
+              </div>
+            </div>
           </div>
-        )}
-      </Transition>
-      {/* <Footer className={styles.footer} /> */}
+        </div>
+      </Section>
+      <br /><br /><br />
       <Footer />
-    </Section>
+    </div>
   );
 };
-
-function getDelay(delayMs, offset = numToMs(0), multiplier = 1) {
-  const numDelay = msToNum(delayMs) * multiplier;
-  return cssProps({ delay: numToMs((msToNum(offset) + numDelay).toFixed(0)) });
-}

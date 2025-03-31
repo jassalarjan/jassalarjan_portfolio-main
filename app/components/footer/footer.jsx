@@ -1,63 +1,55 @@
-import { Link } from '~/components/link';
-import { Text } from '~/components/text';
-import { classes } from '~/utils/style';
-import config from '~/config.json';
+import React from 'react';
+import { Link } from '@remix-run/react';
 import styles from './footer.module.css';
 
-// export const Footer = ({ className }) => (
-//   <footer className={classes(styles.footer, className)}>
-//     <Text size="s" align="center">
-//       <span className={styles.date}>
-//         {`© ${new Date().getFullYear()} ${config.name}.`}
-//       </span>
-//       <Link secondary className={styles.link} href="/humans.txt" target="_self">
-//         Crafted by yours truly
-//       </Link>
-//     </Text>
-//   </footer>
-// );
+export const Footer = () => {
+  // Function to generate random bubbles
+  const generateBubbles = (count = 10) => {
+    return Array.from({ length: count }, (_, index) => {
+      const size = 2 + Math.random() * 3; // Random size between 2-5rem
+      const distance = 6 + Math.random() * 4; // Random distance between 6-10rem
+      const position = Math.random() * 100; // Random position between 0-100%
+      const time = 2 + Math.random() * 2; // Random animation time between 2-4s
+      const delay = -Math.random() * 4; // Random delay between 0-4s
 
-
-export const Footer = ({ className }) => {
-  const bubbles = Array.from({ length: 128 }, (_, i) => ({
-    size: 2 + Math.random() * 4,
-    distance: 6 + Math.random() * 4,
-    position: Math.random() * 100,
-    time: 2 + Math.random() * 2,
-    delay: -Math.random() * 2,
-  }));
+      return (
+        <div
+          key={index}
+          className={styles.bubble}
+          style={{
+            '--size': `${size}rem`,
+            '--distance': `${distance}rem`,
+            '--position': `${position}%`,
+            '--time': `${time}s`,
+            '--delay': `${delay}s`
+          }}
+        />
+      );
+    });
+  };
 
   return (
-    <div className="bubble-foot">
-      <div className="foot">
-        <div className="bubbles">
-          {bubbles.map((bubble, index) => (
-            <div
-              key={index}
-              className="bubble"
-              style={{
-                '--size': `${bubble.size}rem`,
-                '--distance': `${bubble.distance}rem`,
-                '--position': `${bubble.position}%`,
-                '--time': `${bubble.time}s`,
-                '--delay': `${bubble.delay}s`,
-              }}
+    <>
+      <footer className={styles.footer}>
+        <div className={styles.bubbles}>
+          {generateBubbles(15)}
+        </div>
+        <div className={styles.content}>
+          <div className={styles.footerContent}>
+            <a 
+              className={styles.image} 
+              href="https://github.com/jassalarjan" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={{ backgroundImage: 'url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/199011/happy.svg")' }} 
             />
-          ))}
+            <Link to="/humans.txt" className={styles.craftedBy}>
+              Crafted by yours truly
+            </Link>
+            <p className={styles.copyright}>© {new Date().getFullYear()} Arjan Singh Jassal</p>
+          </div>
         </div>
-        <div className="content">
-          <footer className={classes(styles.footer, className)}>
-            <Text size="s" align="center">
-              <span className={styles.date}>
-                {`© ${new Date().getFullYear()} ${config.name}.`}
-              </span>
-              <Link secondary className={styles.link} href="/humans.txt" target="_self">
-                Crafted by yours truly
-              </Link>
-            </Text>
-          </footer>
-        </div>
-      </div>
+      </footer>
       <svg style={{ position: 'fixed', top: '100vh' }}>
         <defs>
           <filter id="blob">
@@ -68,11 +60,14 @@ export const Footer = ({ className }) => {
               values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
               result="blob"
             />
+            <feComposite in="SourceGraphic" in2="blob" operator="atop" />
           </filter>
         </defs>
       </svg>
-    </div>
+    </>
   );
 };
 
-// export default Footer;
+export default Footer;
+
+								                            

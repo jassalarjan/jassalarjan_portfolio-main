@@ -20,7 +20,7 @@
     background-color: var(--background);
     transition: var(--durationM) ease;
     transition-property: background, opacity;
-    color: var(--textBody);
+    color: var(--text);
     width: 100vw;
     overflow-x: hidden;
     opacity: 1;
@@ -32,7 +32,7 @@
 
   /* Typography Styles */
   :global(h1) {
-    color: var(--textTitle);
+    color: var(--h1Color);
     font-size: var(--fontSizeH1);
     font-weight: var(--fontWeightBold);
     line-height: var(--lineHeightTitle);
@@ -40,7 +40,7 @@
   }
 
   :global(h2) {
-    color: var(--textTitle);
+    color: var(--h2Color);
     font-size: var(--fontSizeH2);
     font-weight: var(--fontWeightBold);
     line-height: var(--lineHeightTitle);
@@ -48,7 +48,7 @@
   }
 
   :global(h3) {
-    color: var(--textTitle);
+    color: var(--h3Color);
     font-size: var(--fontSizeH3);
     font-weight: var(--fontWeightBold);
     line-height: var(--lineHeightTitle);
@@ -56,7 +56,7 @@
   }
 
   :global(h4) {
-    color: var(--textTitle);
+    color: var(--h4Color);
     font-size: var(--fontSizeH4);
     font-weight: var(--fontWeightBold);
     line-height: var(--lineHeightTitle);
@@ -64,7 +64,7 @@
   }
 
   :global(h5) {
-    color: var(--textTitle);
+    color: var(--h5Color);
     font-size: var(--fontSizeH5);
     font-weight: var(--fontWeightBold);
     line-height: var(--lineHeightTitle);
@@ -72,26 +72,26 @@
   }
 
   :global(p) {
-    color: var(--textBody);
+    color: var(--paragraphColor);
     font-size: var(--fontSizeBodyM);
     line-height: var(--lineHeightBody);
     margin-bottom: var(--spaceM);
   }
 
   :global(a) {
-    color: var(--primary);
+    color: var(--linkColor);
     text-decoration: none;
     transition: color var(--durationS) ease;
 
     &:hover {
-      color: var(--accent);
+      color: var(--linkHoverColor);
     }
   }
 
   :global(:where(code, pre)) {
     font-family: var(--monoFontStack);
     background-color: var(--backgroundLight);
-    color: var(--textBody);
+    color: var(--text);
     padding: var(--spaceS) var(--spaceM);
     border-radius: 4px;
   }
@@ -112,7 +112,7 @@
 
   /* List Styles */
   :global(ul), :global(ol) {
-    color: var(--textBody);
+    color: var(--text);
     margin-bottom: var(--spaceM);
     padding-left: var(--spaceL);
   }
@@ -126,7 +126,7 @@
     border-left: 4px solid var(--primary);
     padding-left: var(--spaceM);
     margin: var(--spaceL) 0;
-    color: var(--textBody);
+    color: var(--text);
     font-style: italic;
   }
 
@@ -140,33 +140,33 @@
   :global(th), :global(td) {
     padding: var(--spaceM);
     border: 1px solid var(--backgroundLight);
-    color: var(--textBody);
+    color: var(--text);
   }
 
   :global(th) {
     background-color: var(--backgroundLight);
-    color: var(--textTitle);
+    color: var(--text);
     font-weight: var(--fontWeightBold);
   }
 
   /* Form Element Styles */
   :global(input), :global(textarea), :global(select) {
     background-color: var(--backgroundLight);
-    border: 1px solid var(--backgroundLight);
-    color: var(--textBody);
+    border: 1px solid var(--inputBorderColor);
+    color: var(--inputTextColor);
     padding: var(--spaceS) var(--spaceM);
     border-radius: 4px;
     transition: border-color var(--durationS) ease;
 
     &:focus {
-      border-color: var(--primary);
+      border-color: var(--inputFocusBorderColor);
       outline: none;
     }
   }
 
   :global(button) {
-    background-color: var(--primary);
-    color: var(--background);
+    background-color: var(--buttonBgColor);
+    color: var(--buttonTextColor);
     border: none;
     padding: var(--spaceS) var(--spaceM);
     border-radius: 4px;
@@ -174,7 +174,7 @@
     transition: background-color var(--durationS) ease;
 
     &:hover {
-      background-color: var(--accent);
+      background-color: var(--buttonHoverBgColor);
     }
   }
 

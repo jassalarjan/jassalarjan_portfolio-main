@@ -8,6 +8,7 @@
     top: var(--inset);
     right: var(--inset);
     transform: translate3d(0, 0, 0);
+    color: var(--colorTextBody);
 
     @media (--mediaMobile), (--mediaMobileLS) {
       &:not([data-mobile='true']) {

@@ -1,138 +1,138 @@
-@layer components {
-  .foot {
-    margin-top: 10rem;
-    z-index: 1;
-    --foot-background: var(--backgroundLight);
-    display: grid;
-    position: relative;
-    grid-area: foot;
-    min-height: 12rem;
-  }
-  .foot .bubbles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1rem;
-    background: var(--foot-background);
-    filter: url('#blob');
-  }
-  .foot .bubbles .bubble {
-    position: absolute;
-    left: var(--position, 50%);
-    background: var(--foot-background);
-    border-radius: 100%;
-    -webkit-animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s),
-      bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
-    animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s),
-      bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
-    transform: translate(-50%, 100%);
-  }
-  .foot .content {
-    z-index: 2;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-gap: 4rem;
-    padding: 2rem;
-    background: var(--foot-background);
-  }
-  .foot .content a,
-  .foot .content p {
-    color: var(--textBody);
-    text-decoration: none;
-    transition: color var(--durationS) ease;
+body .footer {
+  z-index: 1;
+  position: relative;
+  background: var(--primary);
+  padding: 20px 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
+  margin: 0;
+}
+body .footer .bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1rem;
+  background: var(--primary);
+  -webkit-filter: url("#blob");
+          filter: url("#blob");
+  width: 100%;
+  overflow: visible;
+  margin: 0;
+}
+body .footer .bubbles .bubble {
+  position: absolute;
+  left: var(--position, 50%);
+  background: var(--primary);
+  border-radius: 100%;
+  -webkit-animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s), bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
+          animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s), bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
+  -webkit-transform: translate(-50%, 100%);
+          transform: translate(-50%, 100%);
+  will-change: transform;
+  bottom: -4rem;
+}
+body .footer .content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  box-sizing: border-box;
+  overflow: visible;
+}
+body .footer .content a, body .footer .content p {
+  color: var(--background);
+  text-decoration: none;
+}
+body .footer .content b {
+  color: var(--background);
+}
+body .footer .content p {
+  font-size: .75rem;
+}
+body .footer .content > div {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  -webkit-box-pack: center;
+          justify-content: center;
+}
+body .footer .content > div > div {
+  margin: 0.25rem 0;
+}
+body .footer .content > div > div > * {
+  margin-right: .5rem;
+}
+body .footer .content > div .image {
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+body .footer .content .craftedBy {
+  color: var(--background);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+body .footer .content .craftedBy:hover {
+  color: var(--text);
+}
+body .footer .content .copyright {
+  color: var(--background);
+  font-size: 0.9rem;
+  margin: 0;
+}
 
-    &:hover {
-      color: var(--accent);
-    }
+@-webkit-keyframes bubble-size {
+  0%, 75% {
+    width: var(--size, 4rem);
+    height: var(--size, 4rem);
   }
-  .foot .content b {
-    color: var(--textTitle);
+  100% {
+    width: 0rem;
+    height: 0rem;
   }
-  .foot .content p {
-    margin: 0;
-    font-size: 0.75rem;
-  }
-  .foot .content > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .foot .content > div > div {
-    margin: 0.25rem 0;
-  }
-  .foot .content > div > div > * {
-    margin-right: 0.5rem;
-  }
-  .foot .content > div .image {
-    align-self: center;
-    width: 4rem;
-    height: 4rem;
-    margin: 0.25rem 0;
-    background-size: cover;
-    background-position: center;
-  }
+}
 
-  @-webkit-keyframes bubble-size {
-    0%,
-    75% {
-      width: var(--size, 4rem);
-      height: var(--size, 4rem);
-    }
-    100% {
-      width: 0rem;
-      height: 0rem;
-    }
+@keyframes bubble-size {
+  0%, 75% {
+    width: var(--size, 4rem);
+    height: var(--size, 4rem);
   }
-
-  @keyframes bubble-size {
-    0%,
-    75% {
-      width: var(--size, 4rem);
-      height: var(--size, 4rem);
-    }
-    100% {
-      width: 0rem;
-      height: 0rem;
-    }
+  100% {
+    width: 0rem;
+    height: 0rem;
   }
-  @-webkit-keyframes bubble-move {
-    0% {
-      bottom: -4rem;
-    }
-    100% {
-      bottom: var(--distance, 10rem);
-    }
+}
+@-webkit-keyframes bubble-move {
+  0% {
+    bottom: -4rem;
   }
-  @keyframes bubble-move {
-    0% {
-      bottom: -4rem;
-    }
-    100% {
-      bottom: var(--distance, 10rem);
-    }
+  100% {
+    bottom: var(--distance, 10rem);
   }
-
-  .footer {
-    --lineHeight: 2;
-
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: center;
-    width: 100vw;
-    padding: var(--space3XL) var(--spaceL);
-    z-index: var(--zIndex2);
-    position: relative;
+}
+@keyframes bubble-move {
+  0% {
+    bottom: -4rem;
   }
-
-  .link {
-    display: inline-flex;
-  }
-
-  .date {
-    padding-right: var(--spaceXS);
-    display: inline-flex;
-    color:#fff;
+  100% {
+    bottom: var(--distance, 10rem);
   }
 }

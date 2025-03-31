@@ -112,8 +112,8 @@ const glyphs = [
   'ਅ', 'ਆ', 'ਇ', 'ਈ', 'ਉ', 'ਊ', 'ਏ', 'ਐ', 'ਓ', 'ਔ',
   'ਕ', 'ਖ', 'ਗ', 'ਘ', 'ਙ', 'ਚ', 'ਛ', 'ਜ', 'ਝ', 'ਞ',
   'ਟ', 'ਠ', 'ਡ', 'ਢ', 'ਣ', 'ਤ', 'ਥ', 'ਦ', 'ਧ', 'ਨ',
-  'ਪ', 'ਫ', 'ਬ', 'ਭ', 'ਮ', 'ਯ', 'ਰ', 'ਲ', 'ਵ', 'ਸ਼',
-  'ਸ', 'ਹ', 'ਲ਼', 'ਖ਼', 'ਗ਼', 'ਜ਼', 'ਫ਼', 'ੰ', 'ੱ', 'ਂ',
+  'ਪ', 'ਫ', 'ਬ', 'ਭ', 'ਮ', 'ਯ', 'ਰ', 'ਲ', 'ਵ', 'ਸ਼',
+  'ਸ', 'ਹ', 'ਲ਼', 'ਖ਼', 'ਗ਼', 'ਜ਼', 'ਫ਼', 'ੰ', 'ੱ', 'ਂ',
 ];
 
 const CharType = {
@@ -122,12 +122,23 @@ const CharType = {
 };
 
 function shuffle(content, output, position) {
+  // Initialize output array if missing values
+  if (!output || output.length < content.length) {
+    output = content.map(() => ({ type: CharType.Glyph, value: '' }));
+  }
+  
   return content.map((value, index) => {
     if (index < position) {
       return { type: CharType.Value, value };
     }
 
     if (position % 1 < 0.5) {
+      const rand = Math.floor(Math.random() * glyphs.length);
+      return { type: CharType.Glyph, value: glyphs[rand] };
+    }
+    
+    // Make sure we have a defined output value to return
+    if (!output[index] || output[index].value === undefined) {
       const rand = Math.floor(Math.random() * glyphs.length);
       return { type: CharType.Glyph, value: glyphs[rand] };
     }
@@ -144,21 +155,37 @@ export const DecoderText = memo(
     const decoderSpring = useSpring(0, { stiffness: 8, damping: 5 });
 
     useEffect(() => {
+      if (!container.current) return;
+      
       const containerInstance = container.current;
       const content = text.split('');
+      
+      // Initialize output with correct length
+      output.current = content.map(() => ({ type: CharType.Glyph, value: '' }));
+      
       let animation;
 
       const renderOutput = () => {
-        const characterMap = output.current.map(item => {
-          return `<span class="${styles[item.type]}">${item.value}</span>`;
-        });
+        if (!containerInstance) return;
+        
+        try {
+          const characterMap = output.current.map(item => {
+            return `<span class="${styles[item.type]}">${item.value || ''}</span>`;
+          });
 
-        containerInstance.innerHTML = characterMap.join('');
+          containerInstance.innerHTML = characterMap.join('');
+        } catch (error) {
+          console.error('Error rendering decoder text:', error);
+        }
       };
 
       const unsubscribeSpring = decoderSpring.on('change', value => {
-        output.current = shuffle(content, output.current, value);
-        renderOutput();
+        try {
+          output.current = shuffle(content, output.current, value);
+          renderOutput();
+        } catch (error) {
+          console.error('Error in decoder animation:', error);
+        }
       });
 
       const startSpring = async () => {
@@ -173,7 +200,7 @@ export const DecoderText = memo(
       if (reduceMotion) {
         output.current = content.map((value, index) => ({
           type: CharType.Value,
-          value: content[index],
+          value: content[index] || '',
         }));
         renderOutput();
       }

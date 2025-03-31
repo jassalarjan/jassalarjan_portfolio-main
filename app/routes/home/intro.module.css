@@ -295,7 +295,6 @@
     transform: translateY(0);
   }
 }
-
 .mobileScrollIndicator {
   position: fixed;
   bottom: 0;
@@ -334,3 +333,4 @@
     opacity: 1;
   }
 }
+

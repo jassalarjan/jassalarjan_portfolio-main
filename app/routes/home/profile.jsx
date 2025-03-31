@@ -1,5 +1,3 @@
-import profileImgLarge from '~/assets/profile-large.jpg';
-import profileImgPlaceholder from '~/assets/profile-placeholder.jpg';
 import profileImg from '~/assets/profile.jpg';
 import { Button } from '~/components/button';
 import { DecoderText } from '~/components/decoder-text';
@@ -21,7 +19,7 @@ const ProfileText = ({ visible, titleId }) => (
       <DecoderText text="Hi there" start={visible} delay={500} />
     </Heading>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      I’m Arjan, currently I live in Delhi, India working as a senior full stack developer at {''}
+      I'm Arjan, currently I live in Delhi, India working as a senior full stack developer at {''}
       <Link href="https://www.arjanwebcraft.com">Arjan Web Craft</Link>. My projects include websites, PWA's and Canva Designs. Being comfortable with code allows me to rapidly
       prototype and validate experiences.
     </Text>
@@ -58,7 +56,7 @@ export const Profile = ({ id, visible, sectionRef }) => {
                 href="/contact"
                 icon="send"
               >
-                Send me a message
+                Contact me
               </Button>
             </div>
             <div className={styles.column}>
@@ -77,8 +75,8 @@ export const Profile = ({ id, visible, sectionRef }) => {
                 <Image
                   reveal
                   delay={100}
-                  placeholder={profileImgPlaceholder}
-                  srcSet={`${profileImg} 480w, ${profileImgLarge} 960w`}
+                  placeholder={profileImg}
+                  src={profileImg}
                   width={960}
                   height={1280}
                   sizes={`(max-width: ${media.mobile}px) 100vw, 480px`}

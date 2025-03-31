@@ -15,6 +15,7 @@ import {
   UniformsUtils,
   Vector2,
   WebGLRenderer,
+  Color,
 } from 'three';
 import { media } from '~/utils/style';
 import { throttle } from '~/utils/throttle';
@@ -71,7 +72,10 @@ export const DisplacementSphere = props => {
     material.current.onBeforeCompile = shader => {
       uniforms.current = UniformsUtils.merge([
         shader.uniforms,
-        { time: { type: 'f', value: 0 } },
+        { 
+          time: { type: 'f', value: 0 },
+          themeColor: { type: 'v3', value: new Color(theme === 'light' ? '#000000' : '#ffffff') }
+        },
       ]);
 
       shader.uniforms = uniforms.current;
@@ -181,6 +185,12 @@ export const DisplacementSphere = props => {
       cancelAnimationFrame(animation);
     };
   }, [isInViewport, reduceMotion, rotationX, rotationY]);
+
+  useEffect(() => {
+    if (uniforms.current) {
+      uniforms.current.themeColor.value = new Color(theme === 'light' ? '#000000' : '#ffffff');
+    }
+  }, [theme]);
 
   return (
     <Transition in timeout={3000} nodeRef={canvasRef}>

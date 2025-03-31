@@ -1,9 +1,8 @@
 {
   "name": "portfolio",
   "homepage": "https://arjansinghjassal.xyz",
-  "description": "Portfolio site for Hamish Williams",
-  "repository": "https://github.com/HamishMW/portfolio.git",
-  "author": "Hamish Williams",
+  "description": "Portfolio site for Arjan Singh Jassal",
+  "author": "Arjan Singh Jassal",
   "sideEffects": false,
   "type": "module",
   "scripts": {
@@ -34,6 +33,7 @@
     "gsap": "^3.12.7",
     "isbot": "^4.1.0",
     "lodash": "^4.17.21",
+    "lucide-react": "^0.485.0",
     "miniflare": "^3.20231030.4",
     "react": "^18.3.1",
     "react-dom": "^18.2.0",
