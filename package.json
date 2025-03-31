@@ -6,15 +6,11 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "remix vite:build",
-    "dev": "node ./scripts/dev.cjs && remix vite:dev",
-    "start": "wrangler pages dev ./build/client",
-    "postinstall": "node ./scripts/draco.cjs",
-    "deploy": "npm run build",
-    "dev:storybook": "storybook dev -p 6006",
-    "build:storybook": "storybook build",
-    "deploy:storybook": "wrangler pages deploy ./storybook-static --project-name portfolio-storybook --branch main"
-  },
+  "build": "remix vite:build",
+  "start": "node build/server.js",
+  "dev": "node ./scripts/dev.cjs && remix vite:dev"
+}
+,
   "dependencies": {
     "@aws-sdk/client-ses": "^3.515.0",
     "@emotion/react": "^11.14.0",
