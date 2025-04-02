@@ -11,7 +11,7 @@ import { useWindowSize } from '~/hooks';
 import { Suspense, lazy, useState, useEffect } from 'react';
 import { cssProps, media } from '~/utils/style';
 import { useHydrated } from '~/hooks/useHydrated';
-import katakana from './katakana.svg';
+import arjan from './arjan.svg';
 import styles from './project-summary.module.css';
 
 const Model = lazy(() =>
@@ -52,7 +52,7 @@ export function ProjectShowcase({
     console.log('Component Mounted, Hydration:', isHydrated);
   }, [isHydrated]);
 
-  function renderKatakana(device, visible) {
+  function renderarjan(device, visible) {
     return (
       <svg
         type="project"
@@ -63,7 +63,7 @@ export function ProjectShowcase({
         data-device={device}
         viewBox="0 0 751 136"
       >
-        <use href={`${katakana}#katakana-project`} />
+        <use href={`${arjan}#arjan-project`} />
       </svg>
     );
   }
@@ -118,7 +118,7 @@ export function ProjectShowcase({
 
           return (
             <div key={deviceType} className={styles.model} data-device={deviceType}>
-              {renderKatakana(deviceType, visible)}
+              {renderarjan(deviceType, visible)}
               {!modelLoaded && <Loader center className={styles.loader} data-visible={visible} />}
               {isHydrated && visible && (
                 <Suspense fallback={<Loader center />}>

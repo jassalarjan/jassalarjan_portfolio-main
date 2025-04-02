@@ -11,7 +11,7 @@ import { useWindowSize } from '~/hooks';
 import { Suspense, lazy, useState, useEffect } from 'react';
 import { cssProps, media } from '~/utils/style';
 import { useHydrated } from '~/hooks/useHydrated';
-import katakana from './katakana.svg';
+import arjan from './arjan.svg';
 import styles from './project-summary.module.css';
 
 const Model = lazy(() =>
@@ -57,7 +57,7 @@ export function ProjectSummary({
     setModelLoaded(true);
   }
 
-  function renderKatakana(device, visible) {
+  function renderarjan(device, visible) {
     return (
       <svg
         type="project"
@@ -68,7 +68,7 @@ export function ProjectSummary({
         data-device={device}
         viewBox="0 0 751 136"
       >
-        <use href={`${katakana}#katakana-project`} />
+        <use href={`${arjan}#arjan-project`} />
       </svg>
     );
   }
@@ -129,7 +129,7 @@ export function ProjectSummary({
       >
         {model.type === 'laptop' && (
           <>
-            {renderKatakana('laptop', visible)}
+            {renderarjan('laptop', visible)}
             <div className={styles.model} data-device="laptop">
               {!modelLoaded && (
                 <Loader center className={styles.loader} data-visible={visible} />
@@ -159,7 +159,7 @@ export function ProjectSummary({
         )}
         {model.type === 'phone' && (
           <>
-            {renderKatakana('phone', visible)}
+            {renderarjan('phone', visible)}
             <div className={styles.model} data-device="phone">
               {!modelLoaded && (
                 <Loader center className={styles.loader} data-visible={visible} />

@@ -44,7 +44,7 @@ export const Footer = () => {
               style={{ backgroundImage: 'url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/199011/happy.svg")' }} 
             />
             <Link to="/humans.txt" className={styles.craftedBy}>
-              Crafted by yours truly
+              Crafted by 
             </Link>
             <p className={styles.copyright}>© {new Date().getFullYear()} Arjan Singh Jassal</p>
           </div>

@@ -10,7 +10,7 @@ import { Text } from '~/components/text';
 import { Transition } from '~/components/transition';
 import { Fragment, useState } from 'react';
 import { media } from '~/utils/style';
-import katakana from './katakana.svg';
+import arjan from './arjan.svg';
 import styles from './profile.module.css';
 
 const ProfileText = ({ visible, titleId }) => (
@@ -83,7 +83,7 @@ export const Profile = ({ id, visible, sectionRef }) => {
                   alt="Me making a pose for official pic"
                 />
                 <svg className={styles.svg} data-visible={visible} viewBox="0 0 136 766">
-                  <use href={`${katakana}#katakana-profile`} />
+                  <use href={`${arjan}#arjan-profile`} />
                 </svg>
               </div>
             </div>

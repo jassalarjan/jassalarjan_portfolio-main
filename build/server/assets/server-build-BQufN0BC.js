@@ -3205,7 +3205,7 @@ const Link = forwardRef(
     return /* @__PURE__ */ jsx(Link$1, { unstable_viewTransition: true, prefetch: "intent", ...linkProps, to: href, children });
   }
 );
-const katakana = "/assets/katakana-DR-bVyLd.svg";
+const arjan = "/assets/arjan-DR-bVyLd.svg";
 const profile = "_profile_s38cy_1";
 const content$1 = "_content_s38cy_37";
 const column = "_column_s38cy_50";
@@ -3294,7 +3294,7 @@ const Profile = ({ id, visible, sectionRef }) => {
                 alt: "Me making a pose for official pic"
               }
             ),
-            /* @__PURE__ */ jsx("svg", { className: styles$6.svg, "data-visible": visible2, viewBox: "0 0 136 766", children: /* @__PURE__ */ jsx("use", { href: `${katakana}#katakana-profile` }) })
+            /* @__PURE__ */ jsx("svg", { className: styles$6.svg, "data-visible": visible2, viewBox: "0 0 136 766", children: /* @__PURE__ */ jsx("use", { href: `${arjan}#arjan-profile` }) })
           ] })
         ] })
       ] }) })
@@ -3388,7 +3388,7 @@ function ProjectSummary({
   function handleModelLoad() {
     setModelLoaded(true);
   }
-  function renderKatakana(device, visible) {
+  function renderarjan(device, visible) {
     return /* @__PURE__ */ jsx(
       "svg",
       {
@@ -3399,7 +3399,7 @@ function ProjectSummary({
         className: styles$5.svg,
         "data-device": device,
         viewBox: "0 0 751 136",
-        children: /* @__PURE__ */ jsx("use", { href: `${katakana}#katakana-project` })
+        children: /* @__PURE__ */ jsx("use", { href: `${arjan}#arjan-project` })
       }
     );
   }
@@ -3461,7 +3461,7 @@ function ProjectSummary({
         onMouseLeave: () => setIsHovered(false),
         children: [
           model2.type === "laptop" && /* @__PURE__ */ jsxs(Fragment$1, { children: [
-            renderKatakana("laptop", visible),
+            renderarjan("laptop", visible),
             /* @__PURE__ */ jsxs("div", { className: styles$5.model, "data-device": "laptop", children: [
               !modelLoaded && /* @__PURE__ */ jsx(Loader, { center: true, className: styles$5.loader, "data-visible": visible }),
               isHydrated && visible && /* @__PURE__ */ jsx(Suspense, { children: /* @__PURE__ */ jsx(
@@ -3486,7 +3486,7 @@ function ProjectSummary({
             ] })
           ] }),
           model2.type === "phone" && /* @__PURE__ */ jsxs(Fragment$1, { children: [
-            renderKatakana("phone", visible),
+            renderarjan("phone", visible),
             /* @__PURE__ */ jsxs("div", { className: styles$5.model, "data-device": "phone", children: [
               !modelLoaded && /* @__PURE__ */ jsx(Loader, { center: true, className: styles$5.loader, "data-visible": visible }),
               isHydrated && visible && /* @__PURE__ */ jsx(Suspense, { children: /* @__PURE__ */ jsx(
