@@ -13,7 +13,8 @@ export const meta = () => {
 export default function Projects() {
   return (
     <div style={{ height: "100%"}}>
-      <ProjectShowcase />
+      <ProjectShowcase style={{ height: "100%"}} />
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
       <Footer />
     </div>
   );
