@@ -3,25 +3,25 @@ export const projects = [
     id: 1,
     title: "Ferrous Crete",
     img: "/images/projects/1.jpg",
-    url: "https://www.projects.arjansinghjassal.xyz/ferr/"
+    url: "https://www.projects.arjanwebcraft.com/ferr/"
   },
   {
     id: 2,
     title: "Liberty Market (Template)",
     img: "/images/projects/2.jpg",
-    url: "https://www.projects.arjansinghjassal.xyz/Liberty_Market/"
+    url: "https://www.projects.arjanwebcraft.com/Liberty_Market/"
   },
   {
     id: 3,
     title: "The Digilogous 8.0",
     img: "/images/projects/3.jpg",
-    url: "https://www.projects.arjansinghjassal.xyz/digi8/"
+    url: "https://www.projects.arjanwebcraft.com/digi8/"
   },
   {
     id: 4,
     title: "The Digilogous 9.0",
     img: "/images/projects/4.jpg",
-    url: "https://www.projects.arjansinghjassal.xyz/digi9/"
+    url: "https://www.projects.arjanwebcraft.com/digi9/"
   },
   {
     id: 5,
